@@ -53,6 +53,6 @@ private:
     /**
      * Updates Grid and ExponentialFog colours
      * according to the ColorsTable property
-     */
+     */  
     void UpdateColors();
 };
