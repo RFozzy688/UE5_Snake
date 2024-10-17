@@ -22,6 +22,7 @@ class SNAKEGAME_API ASG_Grid : public AActor
 
 public:
     ASG_Grid();
+
     virtual void Tick(float DeltaTime) override;
 
     /**
