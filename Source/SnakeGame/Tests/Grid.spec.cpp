@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "Misc/AutomationTest.h"
-#include "SnakeGame/Core/Grid.h"
+#include "Core/Grid.h"
 
 DEFINE_SPEC(FSnakeGrid, "Snake",
     EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority)
+
 void FSnakeGrid::Define()
 {
     using namespace SnakeGame;
