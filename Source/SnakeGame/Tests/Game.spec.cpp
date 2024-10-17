@@ -4,16 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "Misc/AutomationTest.h"
-#include "SnakeGame/Core/Game.h"
+#include "Core/Game.h"
 
 DEFINE_SPEC(FSnakeGame, "Snake",
     EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority)
+
 void FSnakeGame::Define()
 {
     using namespace SnakeGame;
 
     Describe("CoreGame", [this]() {  //
-        It("GridShouldExists",
+        It("GridShouldExist",
             [this]()
             {
                 const Settings GS{10, 10};
