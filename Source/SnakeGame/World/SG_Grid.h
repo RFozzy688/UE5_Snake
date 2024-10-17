@@ -1,15 +1,19 @@
 // Snake Game. Copyright Fozzy. All rights reserved
 
 #pragma once
+
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Core/Types.h"
+#include "World/SG_WorldTypes.h"
 #include "SG_Grid.generated.h"
 
 namespace SnakeGame
 {
 class Grid;
 }
+
+class UStaticMeshComponent;
 
 UCLASS()
 class SNAKEGAME_API ASG_Grid : public AActor
@@ -18,7 +22,6 @@ class SNAKEGAME_API ASG_Grid : public AActor
 
 public:
     ASG_Grid();
-
     virtual void Tick(float DeltaTime) override;
 
     /**
@@ -26,15 +29,29 @@ public:
      * @param Grid  model object
      * @param CellSize  world size of the cell
      */
-    void SetModel(const TSharedPtr<SnakeGame::Grid>& Grid, int32 CellSize);
+    void SetModel(const TSharedPtr<SnakeGame::Grid>& Grid, uint32 InCellSize);
+
+    void UpdateColors(const FSnakeColors& Colors);
 
 protected:
+    UPROPERTY(VisibleAnywhere)
+    USceneComponent* Origin;
+
+    UPROPERTY(VisibleAnywhere)
+    UStaticMeshComponent* GridMesh;
+
     virtual void BeginPlay() override;
 
 private:
-    SnakeGame::Dim GridDim;
-    int32 CellSize;
-    int32 WorldWidth;
-    int32 WorldHeight;
+    UPROPERTY()
+    UMaterialInstanceDynamic* GridMaterial = nullptr;
+
+    SnakeGame::Dim GridDim{0};
+    uint32 CellSize{0};
+    uint32 WorldWidth{0};
+    uint32 WorldHeight{0};
+
+    void SetModel(const TSharedPtr<SnakeGame::Grid>& Grid, int32 InCellSize);
+
     void DrawGrid();
 };

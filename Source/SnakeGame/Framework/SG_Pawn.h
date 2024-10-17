@@ -23,7 +23,7 @@ public:
      * @param CellSize  world size of the cell
      * @param GridOrigin  world transformation of the grid
      */
-    void UpdateLocation(const SnakeGame::Dim& Dim, int32 CellSize, const FTransform& GridOrigin);
+    void UpdateLocation(const SnakeGame::Dim& InDim, int32 InCellSize, const FTransform& InGridOrigin);
 
 protected:
     UPROPERTY(VisibleAnywhere)
@@ -36,6 +36,8 @@ private:
     SnakeGame::Dim Dim;
     int32 CellSize;
     FTransform GridOrigin;
+
+    FDelegateHandle ResizedHandle;
 
     void OnViewportResized(FViewport* Viewport, uint32 Val);
 };

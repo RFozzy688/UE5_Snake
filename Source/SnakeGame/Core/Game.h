@@ -7,12 +7,15 @@
 
 namespace SnakeGame
 {
+
 class Grid;
+// class Snake;
+// class Food;
 
 class Game
 {
 public:
-    Game(const Settings& settings);
+    Game(const Settings& settings /*, const IPositionRandomizerPtr& randomizer = MakeShared<PositionRandomizer>()*/);
 
     /**
      * Returns the pointer to the grid object
