@@ -17,17 +17,23 @@ class SNAKEGAME_API ASG_Snake : public AActor
 
 public:
     ASG_Snake();
+
+    /**
+     * Set core model to be observed by the Snake world actor
+     * @param Snake  model object
+     * @param CellSize  world size of the cell
+     * @param Dims  dimensions of the grid
+     */
     void SetModel(const TSharedPtr<SnakeGame::Snake>& Snake, uint32 CellSize, const SnakeGame::Dim& Dims);
+
     void UpdateColors(const FSnakeColors& Colors);
 
 protected:
-    virtual void BeginPlay() override;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+    TSubclassOf<ASG_SnakeLink> SnakeHeadClass;
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-    TSubclassOf<AActor> SnakeHeadClass;
-
-    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-    TSubclassOf<AActor> SnakeLinkClass;
+    TSubclassOf<ASG_SnakeLink> SnakeLinkClass;
 
 public:
     virtual void Tick(float DeltaTime) override;
@@ -36,6 +42,7 @@ private:
     TWeakPtr<SnakeGame::Snake> Snake;
     uint32 CellSize;
     SnakeGame::Dim Dims;
+    FLinearColor SnakeLinkColor;
 
     UPROPERTY()
     TArray<ASG_SnakeLink*> SnakeLinks;
