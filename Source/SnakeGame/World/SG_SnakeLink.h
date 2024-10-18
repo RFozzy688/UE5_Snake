@@ -7,6 +7,7 @@
 #include "SG_SnakeLink.generated.h"
 
 class UStaticMeshComponent;
+class UNiagaraSystem;
 
 UCLASS()
 class SNAKEGAME_API ASG_SnakeLink : public AActor
@@ -17,6 +18,7 @@ public:
     ASG_SnakeLink();
     void UpdateColor(const FLinearColor& Color);
     void UpdateScale(uint32 CellSize);
+    void Explode();
 
 protected:
     UPROPERTY(VisibleAnywhere)
@@ -24,4 +26,10 @@ protected:
 
     UPROPERTY(VisibleAnywhere)
     UStaticMeshComponent* LinkMesh;
+
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "VFX")
+    TObjectPtr<UNiagaraSystem> ExplosionEffect;
+
+private:
+    FLinearColor LinkColor;
 };
