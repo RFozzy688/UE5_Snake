@@ -11,7 +11,7 @@ using namespace SnakeGame;
 
 Game::Game(const Settings& settings, const IPositionRandomizerPtr& randomizer) : c_settings(settings)
 {
-    m_grid = MakeShared<Grid>(settings.gridDims , randomizer);
+    m_grid = MakeShared<Grid>(settings.gridDims, randomizer);
     checkf(m_grid->dim().width / 2 >= settings.snake.defaultSize, TEXT("Snake initial length [%i] doesn't fit grid width [%i]"),
         settings.snake.defaultSize, m_grid->dim().width);
 
@@ -50,7 +50,7 @@ void Game::update(float deltaSeconds, const Input& input)
 void Game::updateGrid()
 {
     m_grid->update(m_snake->links().GetHead(), CellType::Snake);
-    //m_grid->printDebug();
+    // m_grid->printDebug();
 }
 
 bool Game::updateTime(float deltaSeconds)

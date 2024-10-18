@@ -16,7 +16,7 @@ class Food;
 class Game
 {
 public:
-    Game(const Settings& settings , const IPositionRandomizerPtr& randomizer = MakeShared<PositionRandomizer>());
+    Game(const Settings& settings, const IPositionRandomizerPtr& randomizer = MakeShared<PositionRandomizer>());
 
     /**
      * Returns the pointer to the grid object
