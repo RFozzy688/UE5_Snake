@@ -35,6 +35,7 @@ public:
     void UpdateColor(const FLinearColor& Color);
 
     void Explode();
+    void Hide();
 
 protected:
     UPROPERTY(VisibleAnywhere)
