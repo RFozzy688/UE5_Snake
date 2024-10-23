@@ -54,6 +54,17 @@ public:
             { return Mapping.Action == Action; });
         return FoundAcionKeyMapping ? FoundAcionKeyMapping->Key.GetDisplayName().ToString() : FString{};
     }
+
+    static void SetUIInput(UWorld* World, bool Enabled)
+    {
+        if (!World) return;
+
+        if (auto* PC = World->GetFirstPlayerController())
+        {
+            PC->SetShowMouseCursor(Enabled);
+            Enabled ? PC->SetInputMode(FInputModeGameAndUI().SetHideCursorDuringCapture(false)) : PC->SetInputMode(FInputModeGameOnly());
+        }
+    }
 };
 
 }  // namespace SnakeGame

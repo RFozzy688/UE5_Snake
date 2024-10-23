@@ -5,6 +5,11 @@
 #include "UI/SG_GameOverWidget.h"
 #include "Core/Game.h"
 
+ASG_HUD::ASG_HUD()
+{
+    PrimaryActorTick.TickInterval = 1.0f;
+}
+
 void ASG_HUD::BeginPlay()
 {
     Super::BeginPlay();
@@ -34,10 +39,7 @@ void ASG_HUD::SetModel(const TSharedPtr<SnakeGame::Game>& InGame)
     using namespace SnakeGame;
     Game = InGame;
 
-    SetUIMatchState(EUIGameState::GameInProgress);
-
-    GameplayWidget->SetScore(InGame->score());
-    GameOverWidget->SetScore(InGame->score());
+    SetUIGameState(EUIGameState::GameInProgress);
 
     InGame->subscribeOnGameplayEvent(
         [&](GameplayEvent Event)
@@ -50,7 +52,7 @@ void ASG_HUD::SetModel(const TSharedPtr<SnakeGame::Game>& InGame)
                 case GameplayEvent::GameCompleted: [[fallthrough]];
                 case GameplayEvent::GameOver:  //
                     GameOverWidget->SetScore(InGame->score());
-                    SetUIMatchState(EUIGameState::GameOver);
+                    SetUIGameState(EUIGameState::GameOver);
                     break;
             }
         });
@@ -72,7 +74,7 @@ void ASG_HUD::Tick(float DeltaSeconds)
     }
 }
 
-void ASG_HUD::SetUIMatchState(EUIGameState InGameState)
+void ASG_HUD::SetUIGameState(EUIGameState InGameState)
 {
     if (CurrentWidget)
     {
@@ -83,6 +85,12 @@ void ASG_HUD::SetUIMatchState(EUIGameState InGameState)
     {
         CurrentWidget = GameWidgets[InGameState];
         CurrentWidget->SetVisibility(ESlateVisibility::Visible);
+    }
+
+    if (InGameState == EUIGameState::GameInProgress && Game.IsValid())
+    {
+        GameplayWidget->SetScore(Game.Pin()->score());
+        GameOverWidget->SetScore(Game.Pin()->score());
     }
 
     GameState = InGameState;
