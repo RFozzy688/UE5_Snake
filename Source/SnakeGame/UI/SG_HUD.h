@@ -11,8 +11,7 @@ class USG_GameOverWidget;
 UENUM()
 enum class EUIGameState : uint8
 {
-    StartGame = 0,
-    GameInProgress,
+    GameInProgress = 0,
     GameOver,
     GameCompleted
 };
@@ -28,6 +27,8 @@ class SNAKEGAME_API ASG_HUD : public AHUD
     GENERATED_BODY()
 
 public:
+    ASG_HUD();
+
     void SetModel(const TSharedPtr<SnakeGame::Game>& Game);
     void SetInputKeyNames(const FString& ResetGameKeyName);
     virtual void Tick(float DeltaSeconds) override;
@@ -56,5 +57,5 @@ private:
 
     TWeakPtr<SnakeGame::Game> Game;
     EUIGameState GameState;
-    void SetUIMatchState(EUIGameState GameState);
+    void SetUIGameState(EUIGameState GameState);
 };
