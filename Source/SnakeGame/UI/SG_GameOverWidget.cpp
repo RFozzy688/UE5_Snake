@@ -5,6 +5,7 @@
 #include "World/SG_WorldUtils.h"
 #include "Components/Button.h"
 #include "Kismet/GameplayStatics.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 void USG_GameOverWidget::NativeOnInitialized()
 {
@@ -12,6 +13,14 @@ void USG_GameOverWidget::NativeOnInitialized()
 
     check(BackToMenuButton);
     BackToMenuButton->OnClicked.AddDynamic(this, &ThisClass::OnBackToMenu);
+
+    check(CloseGameButton);
+    CloseGameButton->OnClicked.AddDynamic(this, &ThisClass::OnCloseGame);
+}
+
+void USG_GameOverWidget::OnCloseGame()
+{
+    UKismetSystemLibrary::QuitGame(GetWorld(), GetOwningPlayer(), EQuitPreference::Quit, false);
 }
 
 void USG_GameOverWidget::SetScore(uint32 Score)

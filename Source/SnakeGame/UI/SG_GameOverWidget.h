@@ -30,9 +30,15 @@ protected:
     UPROPERTY(EditDefaultsOnly)
     TSoftObjectPtr<UWorld> MenuLevel;
 
+    UPROPERTY(meta = (BindWidget))
+    TObjectPtr<UButton> CloseGameButton;
+
     virtual void NativeOnInitialized() override;
 
 private:
     UFUNCTION()
     void OnBackToMenu();
+
+    UFUNCTION()
+    void OnCloseGame();
 };
